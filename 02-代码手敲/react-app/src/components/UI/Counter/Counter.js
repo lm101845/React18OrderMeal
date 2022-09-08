@@ -3,10 +3,11 @@
  * @Date 2022/9/7 21:17
  **/
 
-import React from 'react';
+import React, {useContext} from 'react';
 import classes from './Counter.module.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlus, faMinus} from "@fortawesome/free-solid-svg-icons"
+import TestContext from '../../../store/cart-context'
 
 /**
  * 引入fontAwesome
@@ -26,14 +27,21 @@ import {faPlus, faMinus} from "@fortawesome/free-solid-svg-icons"
  */
 //计数器的组件
 const Counter = (props) => {
+    // console.log(props,'props-Counter组件')
+    //获取CartContext
+    const ctx = useContext(TestContext);
+
     //添加购物车的函数
     const addButtonHandler = () => {
-        props.onAdd(props.meal);
+        // props.onAdd(props.meal);
+        console.log(ctx,'ctx里面有个函数叫addItem')
+        ctx.addItem(props.meal)
     }
 
     //删除食物的函数
     const subButtonHandler = () => {
-        props.onSub(props.meal);
+        // props.onSub(props.meal);
+        ctx.removeItem(props.meal)
     }
     return (<div className={classes.Counter}>
         {//减少按钮和数字不一定有

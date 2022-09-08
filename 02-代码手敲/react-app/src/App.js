@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import Meals from "./components/Meals/Meals";
+import CartContext from "./store/cart-context"
+import FilterMeals from "./components/FilterMeals/FilterMeals";
+import Cart from "./components/Cart/Cart";
 //模拟一组食物的数据
 const MEALS_DATA = [
     {
@@ -65,18 +68,28 @@ const App = () => {
         totalPrice: 0
     })
 
+    //创建一个过滤meals的一个函数
+    const filterHandler = (keyword) => {
+        const newMealsData = MEALS_DATA.filter(item => item.title.indexOf(keyword) !== -1)
+        setMealsData(newMealsData)
+    }
     //向购物车中添加商品——点击加按钮的时候就调用一次
-    const addMealHandler = (meal) => {
+    const addItem = (meal) => {
         //meal表示要添加进购物车的商品
         //对购物车进行复制
+        console.log(cartData, 'cartData')
         const newCart = {...cartData}
+        console.log(newCart.items, 'newCart.items')
+        console.log(meal, 'meal')
 
         //将meal添加到购物车中——有一个问题：如果商品已经存在，就不用加了
         //所以我们在添加之前要做一个判断——判断购物车中是否存在该商品
         if (newCart.items.indexOf(meal) === -1) {
+            console.log('第一次添加')
             newCart.items.push(meal);
             meal.amount = 1;
-        }else{
+        } else {
+            console.log('第二次添加')
             //修改商品的数量
             meal.amount++;
         }
@@ -90,15 +103,15 @@ const App = () => {
     }
 
     //减少商品的数量
-    const subMealHandler = (meal) =>{
+    const removeItem = (meal) => {
         //复制购物车
         const newCart = {...cartData}
         //减少商品数量
         meal.amount--;
         //检查商品数量是否归0
-        if(meal.amount === 0){
+        if (meal.amount === 0) {
             //从购物车中移除商品
-            newCart.items.splice(newCart.items.indexOf(meal),1);
+            newCart.items.splice(newCart.items.indexOf(meal), 1);
         }
         //修改商品的总数和总金额
         newCart.totalAmount--;
@@ -106,14 +119,16 @@ const App = () => {
         setCartData(newCart)
     }
     return (
-        <div>
-            <Meals
-                mealsData={mealsData}
-                onAdd={addMealHandler}
-                onSub={subMealHandler}
-            />
-        </div>
-    );
+        <CartContext.Provider value={{...cartData, addItem, removeItem}}>
+            <div>
+                <FilterMeals onFilter={filterHandler}/>
+                <Meals
+                    mealsData={mealsData}
+                />
+                <Cart/>
+            </div>
+        </CartContext.Provider>
+    )
 }
 
 export default App;
