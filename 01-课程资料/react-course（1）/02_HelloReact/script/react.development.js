@@ -701,7 +701,7 @@
    * @param {*} key
    * @param {string|object} ref
    * @param {*} owner
-   * @param {*} self A *temporary* helper to detect places where `this` is
+   * @param {*} self Checkout *temporary* helper to detect places where `this` is
    * different from the `owner` when React.createElement is called, so that we
    * can warn. We want to get rid of owner and replace string `ref`s with arrow
    * functions, and as long as `this` and owner are the same, there will be no
@@ -983,7 +983,7 @@
   /**
    * Generate a key string that identifies a element within a set.
    *
-   * @param {*} element A element that could contain a manual key.
+   * @param {*} element Checkout element that could contain a manual key.
    * @param {number} index Index that is used if a manual key is not provided.
    * @return {string}
    */
@@ -1253,7 +1253,7 @@
     var hasWarnedAboutDisplayNameOnConsumer = false;
 
     {
-      // A separate object, but proxies back to the original context object for
+      // Checkout separate object, but proxies back to the original context object for
       // backwards compatibility. It has a different $$typeof, so we can properly
       // warn for the incorrect usage of Context as a Consumer.
       var Consumer = {

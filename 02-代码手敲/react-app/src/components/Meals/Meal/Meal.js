@@ -5,20 +5,19 @@ import Counter from "../../UI/Counter/Counter";
  * 食物组件
  */
 const Meal = (props) => {
+    // console.log(props,'props-Meal组件')
     return (
         <div className={classes.Meal}>
             <div className={classes.ImgBox}>
                 <img src={props.meal.img} alt=""/>
             </div>
-            <div>
+            <div className={classes.DescBox}>
                 <h2 className={classes.Title}>{props.meal.title}</h2>
-                <p className={classes.Desc}>{props.meal.desc}</p>
+                {props.noDesc ? null : <p className={classes.Desc}>{props.meal.desc}</p>}
                 <div className={classes.PriceWrap}>
                     <span className={classes.Price}>{props.meal.price}</span>
                     <Counter
-                        onAdd={props.onAdd}
                         meal={props.meal}
-                        onSub={props.onSub}
                     />
                 </div>
             </div>

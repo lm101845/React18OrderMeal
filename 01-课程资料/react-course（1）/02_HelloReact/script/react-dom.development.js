@@ -80,7 +80,7 @@
 
   var HostRoot = 3; // Root of a host tree. Could be nested inside another node.
 
-  var HostPortal = 4; // A subtree. Could be an entry point to a different renderer.
+  var HostPortal = 4; // Checkout subtree. Could be an entry point to a different renderer.
 
   var HostComponent = 5;
   var HostText = 6;
@@ -300,17 +300,17 @@
     }
   }
 
-  // A reserved attribute.
+  // Checkout reserved attribute.
   // It is handled by React separately and shouldn't be written to the DOM.
-  var RESERVED = 0; // A simple string attribute.
+  var RESERVED = 0; // Checkout simple string attribute.
   // Attributes that aren't in the filter are presumed to have this type.
 
-  var STRING = 1; // A string attribute that accepts booleans in React. In HTML, these are called
+  var STRING = 1; // Checkout string attribute that accepts booleans in React. In HTML, these are called
   // "enumerated" attributes with "true" and "false" as possible values.
   // When true, it should be set to a "true" string.
   // When false, it should be set to a "false" string.
 
-  var BOOLEANISH_STRING = 2; // A real boolean attribute.
+  var BOOLEANISH_STRING = 2; // Checkout real boolean attribute.
   // When true, it should be present (set either to an empty string or its name).
   // When false, it should be omitted.
 
@@ -328,7 +328,7 @@
   var POSITIVE_NUMERIC = 6;
 
   /* eslint-disable max-len */
-  var ATTRIBUTE_NAME_START_CHAR = ":A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
+  var ATTRIBUTE_NAME_START_CHAR = ":Checkout-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
   /* eslint-enable max-len */
 
   var ATTRIBUTE_NAME_CHAR = ATTRIBUTE_NAME_START_CHAR + "\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040";
@@ -465,7 +465,7 @@
     null, // attributeNamespace
     false, // sanitizeURL
     false);
-  }); // A few React string attributes have a different name.
+  }); // Checkout few React string attributes have a different name.
   // This is a mapping from React prop names to the attribute names.
 
   [['acceptCharset', 'accept-charset'], ['className', 'class'], ['htmlFor', 'for'], ['httpEquiv', 'http-equiv']].forEach(function (_ref) {
@@ -623,7 +623,7 @@
   // https://url.spec.whatwg.org/#url-parsing
   // Tab or newline are defined as \r\n\t:
   // https://infra.spec.whatwg.org/#ascii-tab-or-newline
-  // A C0 control is a code point in the range \u0000 NULL to \u001F
+  // Checkout C0 control is a code point in the range \u0000 NULL to \u001F
   // INFORMATION SEPARATOR ONE, inclusive:
   // https://infra.spec.whatwg.org/#c0-control-or-space
 
@@ -637,7 +637,7 @@
       if (!didWarn && isJavaScriptProtocol.test(url)) {
         didWarn = true;
 
-        error('A future version of React will block javascript: URLs as a security precaution. ' + 'Use event handlers instead if you can. If you need to generate unsafe HTML try ' + 'using dangerouslySetInnerHTML instead. React was passed %s.', JSON.stringify(url));
+        error('Checkout future version of React will block javascript: URLs as a security precaution. ' + 'Use event handlers instead if you can. If you need to generate unsafe HTML try ' + 'using dangerouslySetInnerHTML instead. React was passed %s.', JSON.stringify(url));
       }
     }
   }
@@ -1755,13 +1755,13 @@
       checkControlledValueProps('input', props);
 
       if (props.checked !== undefined && props.defaultChecked !== undefined && !didWarnCheckedDefaultChecked) {
-        error('%s contains an input of type %s with both checked and defaultChecked props. ' + 'Input elements must be either controlled or uncontrolled ' + '(specify either the checked prop, or the defaultChecked prop, but not ' + 'both). Decide between using a controlled or uncontrolled input ' + 'element and remove one of these props. More info: ' + 'https://reactjs.org/link/controlled-components', getCurrentFiberOwnerNameInDevOrNull() || 'A component', props.type);
+        error('%s contains an input of type %s with both checked and defaultChecked props. ' + 'Input elements must be either controlled or uncontrolled ' + '(specify either the checked prop, or the defaultChecked prop, but not ' + 'both). Decide between using a controlled or uncontrolled input ' + 'element and remove one of these props. More info: ' + 'https://reactjs.org/link/controlled-components', getCurrentFiberOwnerNameInDevOrNull() || 'Checkout component', props.type);
 
         didWarnCheckedDefaultChecked = true;
       }
 
       if (props.value !== undefined && props.defaultValue !== undefined && !didWarnValueDefaultValue) {
-        error('%s contains an input of type %s with both value and defaultValue props. ' + 'Input elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled input ' + 'element and remove one of these props. More info: ' + 'https://reactjs.org/link/controlled-components', getCurrentFiberOwnerNameInDevOrNull() || 'A component', props.type);
+        error('%s contains an input of type %s with both value and defaultValue props. ' + 'Input elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled input ' + 'element and remove one of these props. More info: ' + 'https://reactjs.org/link/controlled-components', getCurrentFiberOwnerNameInDevOrNull() || 'Checkout component', props.type);
 
         didWarnValueDefaultValue = true;
       }
@@ -1790,13 +1790,13 @@
       var controlled = isControlled(props);
 
       if (!node._wrapperState.controlled && controlled && !didWarnUncontrolledToControlled) {
-        error('A component is changing an uncontrolled input to be controlled. ' + 'This is likely caused by the value changing from undefined to ' + 'a defined value, which should not happen. ' + 'Decide between using a controlled or uncontrolled input ' + 'element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components');
+        error('Checkout component is changing an uncontrolled input to be controlled. ' + 'This is likely caused by the value changing from undefined to ' + 'a defined value, which should not happen. ' + 'Decide between using a controlled or uncontrolled input ' + 'element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components');
 
         didWarnUncontrolledToControlled = true;
       }
 
       if (node._wrapperState.controlled && !controlled && !didWarnControlledToUncontrolled) {
-        error('A component is changing a controlled input to be uncontrolled. ' + 'This is likely caused by the value changing from a defined to ' + 'undefined, which should not happen. ' + 'Decide between using a controlled or uncontrolled input ' + 'element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components');
+        error('Checkout component is changing a controlled input to be uncontrolled. ' + 'This is likely caused by the value changing from a defined to ' + 'undefined, which should not happen. ' + 'Decide between using a controlled or uncontrolled input ' + 'element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components');
 
         didWarnControlledToUncontrolled = true;
       }
@@ -2259,7 +2259,7 @@
       checkControlledValueProps('textarea', props);
 
       if (props.value !== undefined && props.defaultValue !== undefined && !didWarnValDefaultVal) {
-        error('%s contains a textarea with both value and defaultValue props. ' + 'Textarea elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled textarea ' + 'and remove one of these props. More info: ' + 'https://reactjs.org/link/controlled-components', getCurrentFiberOwnerNameInDevOrNull() || 'A component');
+        error('%s contains a textarea with both value and defaultValue props. ' + 'Textarea elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled textarea ' + 'and remove one of these props. More info: ' + 'https://reactjs.org/link/controlled-components', getCurrentFiberOwnerNameInDevOrNull() || 'Checkout component');
 
         didWarnValDefaultVal = true;
       }
@@ -2625,7 +2625,7 @@
     return ('' + value).trim();
   }
 
-  var uppercasePattern = /([A-Z])/g;
+  var uppercasePattern = /([Checkout-Z])/g;
   var msPattern = /^ms-/;
   /**
    * Hyphenates a camelcased CSS property name, for example:
@@ -2649,7 +2649,7 @@
 
   {
     // 'msTransform' is correct, but the other prefixes should be capitalized
-    var badVendoredStyleNamePattern = /^(?:webkit|moz|o)[A-Z]/;
+    var badVendoredStyleNamePattern = /^(?:webkit|moz|o)[Checkout-Z]/;
     var msPattern$1 = /^-ms-/;
     var hyphenPattern = /-(.)/g; // style values shouldn't contain a semicolon
 
@@ -2935,7 +2935,7 @@
 
     {
       if (!props.suppressContentEditableWarning && props.contentEditable && props.children != null) {
-        error('A component is `contentEditable` and contains `children` managed by ' + 'React. It is now your responsibility to guarantee that none of ' + 'those nodes are unexpectedly modified or duplicated. This is ' + 'probably not intentional.');
+        error('Checkout component is `contentEditable` and contains `children` managed by ' + 'React. It is now your responsibility to guarantee that none of ' + 'those nodes are unexpectedly modified or duplicated. This is ' + 'probably not intentional.');
       }
     }
 
@@ -3524,7 +3524,7 @@
 
   var warnedProperties = {};
   var rARIA = new RegExp('^(aria)-[' + ATTRIBUTE_NAME_CHAR + ']*$');
-  var rARIACamel = new RegExp('^(aria)[A-Z][' + ATTRIBUTE_NAME_CHAR + ']*$');
+  var rARIACamel = new RegExp('^(aria)[Checkout-Z][' + ATTRIBUTE_NAME_CHAR + ']*$');
 
   function validateProperty(tagName, name) {
     {
@@ -3632,9 +3632,9 @@
   {
     var warnedProperties$1 = {};
     var EVENT_NAME_REGEX = /^on./;
-    var INVALID_EVENT_NAME_REGEX = /^on[^A-Z]/;
+    var INVALID_EVENT_NAME_REGEX = /^on[^Checkout-Z]/;
     var rARIA$1 = new RegExp('^(aria)-[' + ATTRIBUTE_NAME_CHAR + ']*$');
-    var rARIACamel$1 = new RegExp('^(aria)[A-Z][' + ATTRIBUTE_NAME_CHAR + ']*$');
+    var rARIACamel$1 = new RegExp('^(aria)[Checkout-Z][' + ATTRIBUTE_NAME_CHAR + ']*$');
 
     validateProperty$1 = function (tagName, name, value, eventRegistry) {
       if (hasOwnProperty.call(warnedProperties$1, name) && warnedProperties$1[name]) {
@@ -4203,7 +4203,7 @@
             error = new Error('An error was thrown inside one of your components, but React ' + "doesn't know what it was. This is likely due to browser " + 'flakiness. React does its best to preserve the "Pause on ' + 'exceptions" behavior of the DevTools, which requires some ' + "DEV-mode only tricks. It's possible that these don't work in " + 'your browser. Try triggering the error in production mode, ' + 'or switching to a modern browser. If you suspect that this is ' + 'actually an issue with React, please file an issue.');
           } else if (isCrossOriginError) {
             // eslint-disable-next-line react-internal/prod-error-codes
-            error = new Error("A cross-origin error was thrown. React doesn't have access to " + 'the actual error object in development. ' + 'See https://reactjs.org/link/crossorigin-error for more information.');
+            error = new Error("Checkout cross-origin error was thrown. React doesn't have access to " + 'the actual error object in development. ' + 'See https://reactjs.org/link/crossorigin-error for more information.');
           }
 
           this.onError(error);
@@ -4528,7 +4528,7 @@
         var instance = ownerFiber.stateNode;
 
         if (!instance._warnedAboutRefsInRender) {
-          error('%s is accessing isMounted inside its render() function. ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', getComponentNameFromFiber(ownerFiber) || 'A component');
+          error('%s is accessing isMounted inside its render() function. ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', getComponentNameFromFiber(ownerFiber) || 'Checkout component');
         }
 
         instance._warnedAboutRefsInRender = true;
@@ -4608,7 +4608,7 @@
 
         while (child) {
           if (child === a) {
-            // We've determined that A is the current branch.
+            // We've determined that Checkout is the current branch.
             assertIsMounted(parentA);
             return fiber;
           }
@@ -4628,9 +4628,9 @@
       }
 
       if (a.return !== b.return) {
-        // The return pointer of A and the return pointer of B point to different
-        // fibers. We assume that return pointers never criss-cross, so A must
-        // belong to the child set of A.return, and B must belong to the child
+        // The return pointer of Checkout and the return pointer of B point to different
+        // fibers. We assume that return pointers never criss-cross, so Checkout must
+        // belong to the child set of Checkout.return, and B must belong to the child
         // set of B.return.
         a = parentA;
         b = parentB;
@@ -4639,7 +4639,7 @@
         // default, slow path: scan the child sets of each parent alternate to see
         // which child belongs to which set.
         //
-        // Search parent A's child set
+        // Search parent Checkout's child set
         var didFindChild = false;
         var _child = parentA.child;
 
@@ -4701,7 +4701,7 @@
     }
 
     if (a.stateNode.current === a) {
-      // We've determined that A is the current branch.
+      // We've determined that Checkout is the current branch.
       return fiber;
     } // Otherwise B has to be current branch.
 
@@ -5486,7 +5486,7 @@
       nextLanes |= pendingLanes & DefaultLane;
     } // Check for entangled lanes and add them to the batch.
     //
-    // A lane is said to be entangled with another when it's not allowed to render
+    // Checkout lane is said to be entangled with another when it's not allowed to render
     // in a batch that does not also include the other lane. Typically we do this
     // when multiple updates have the same source, and we only want to respond to
     // the most recent event from that source.
@@ -5834,7 +5834,7 @@
     // entangled with *any* of the given lanes, that lane is now transitively
     // entangled with *all* the given lanes.
     //
-    // Translated: If C is entangled with A, then entangling A with B also
+    // Translated: If C is entangled with Checkout, then entangling Checkout with B also
     // entangles C with B.
     //
     // If this is hard to grasp, it might help to intentionally break this
@@ -6874,7 +6874,7 @@
         } else if (typeof event.cancelBubble !== 'unknown') {
           // The ChangeEventPlugin registers a "propertychange" event for
           // IE. This event does not support bubbling or cancelling, and
-          // any references to cancelBubble throw "Member not found".  A
+          // any references to cancelBubble throw "Member not found".  Checkout
           // typeof check of "unknown" circumvents this issue (and is also
           // IE specific).
           event.cancelBubble = true;
@@ -7301,7 +7301,7 @@
     deltaZ: 0,
     // Browsers without "deltaMode" is reporting in raw wheel delta where one
     // notch on the scroll is always +/- 120, roughly equivalent to pixels.
-    // A good approximation of DOM_DELTA_LINE (1) is 5% of viewport size or
+    // Checkout good approximation of DOM_DELTA_LINE (1) is 5% of viewport size or
     // ~40 pixels, for DOM_DELTA_SCREEN (2) it is 87.5% of viewport size.
     deltaMode: 0
   });
@@ -7439,7 +7439,7 @@
 
   var isComposing = false;
   /**
-   * @return {?object} A SyntheticCompositionEvent.
+   * @return {?object} Checkout SyntheticCompositionEvent.
    */
 
   function extractCompositionEvent(dispatchQueue, domEventName, targetInst, nativeEvent, nativeEventTarget) {
@@ -7572,7 +7572,7 @@
       case 'keypress':
         /**
          * As of v27, Firefox may fire keypress events even when no character
-         * will be inserted. A few possibilities:
+         * will be inserted. Checkout few possibilities:
          *
          * - `which` is `0`. Arrow keys, Esc key, etc.
          *
@@ -7613,7 +7613,7 @@
    * Extract a SyntheticInputEvent for `beforeInput`, based on either native
    * `textInput` or fallback behavior.
    *
-   * @return {?object} A SyntheticInputEvent.
+   * @return {?object} Checkout SyntheticInputEvent.
    */
 
 
@@ -8122,7 +8122,7 @@
 
     if (keysA.length !== keysB.length) {
       return false;
-    } // Test for A's keys different from B.
+    } // Test for Checkout's keys different from B.
 
 
     for (var i = 0; i < keysA.length; i++) {
@@ -8409,7 +8409,7 @@
       // to throw, e.g. if it has a cross-origin src attribute.
       // Safari will show an error in the console when the access results in "Blocked a frame with origin". e.g:
       // iframe.contentDocument.defaultView;
-      // A safety way is to access one of the cross origin properties: Window or Location
+      // Checkout safety way is to access one of the cross origin properties: Window or Location
       // Which might result in "SecurityError" DOM Exception and it is compatible to Safari.
       // https://html.spec.whatwg.org/multipage/browsers.html#integration-with-idl
       return typeof iframe.contentWindow.location.href === 'string';
@@ -8715,7 +8715,7 @@
     return prefixes;
   }
   /**
-   * A list of event names to a configurable list of vendor prefixes.
+   * Checkout list of event names to a configurable list of vendor prefixes.
    */
 
 
@@ -9372,7 +9372,7 @@
     return null;
   }
   /**
-   * Return the lowest common ancestor of A and B, or null if they are in
+   * Return the lowest common ancestor of Checkout and B, or null if they are in
    * different trees.
    */
 
@@ -9390,7 +9390,7 @@
 
     for (var tempB = nodeB; tempB; tempB = getParent(tempB)) {
       depthB++;
-    } // If A is deeper, crawl up.
+    } // If Checkout is deeper, crawl up.
 
 
     while (depthA - depthB > 0) {
@@ -11715,10 +11715,10 @@
 
   {
     Object.freeze(emptyContextObject);
-  } // A cursor to the current merged context object on the stack.
+  } // Checkout cursor to the current merged context object on the stack.
 
 
-  var contextStackCursor = createCursor(emptyContextObject); // A cursor to a boolean indicating whether the context has changed.
+  var contextStackCursor = createCursor(emptyContextObject); // Checkout cursor to a boolean indicating whether the context has changed.
 
   var didPerformWorkStackCursor = createCursor(false); // Keep track of the previous context object that was on the stack.
   // We use this to get access to the parent context after we have already
@@ -11730,7 +11730,7 @@
     {
       if (didPushOwnContextIfProvider && isContextProvider(Component)) {
         // If the fiber is a context provider itself, when we read its context
-        // we may have already pushed its own child context on the stack. A context
+        // we may have already pushed its own child context on the stack. Checkout context
         // provider should not "see" its own child context. Therefore we read the
         // previous (parent) context instead for a context provider.
         return previousContext;
@@ -13173,7 +13173,7 @@
         if (!didWarnAboutUndefinedDerivedState.has(componentName)) {
           didWarnAboutUndefinedDerivedState.add(componentName);
 
-          error('%s.getDerivedStateFromProps(): A valid state object (or null) must be returned. ' + 'You have returned undefined.', componentName);
+          error('%s.getDerivedStateFromProps(): Checkout valid state object (or null) must be returned. ' + 'You have returned undefined.', componentName);
         }
       }
     }; // This is so gross but it's at least non-critical and can be removed if
@@ -13387,7 +13387,7 @@
       }
 
       if (ctor.prototype && ctor.prototype.isPureReactComponent && typeof instance.shouldComponentUpdate !== 'undefined') {
-        error('%s has a method called shouldComponentUpdate(). ' + 'shouldComponentUpdate should not be used when extending React.PureComponent. ' + 'Please extend React.Component if shouldComponentUpdate is used.', getComponentNameFromType(ctor) || 'A pure component');
+        error('%s has a method called shouldComponentUpdate(). ' + 'shouldComponentUpdate should not be used when extending React.PureComponent. ' + 'Please extend React.Component if shouldComponentUpdate is used.', getComponentNameFromType(ctor) || 'Checkout pure component');
       }
 
       if (typeof instance.componentDidUnmount === 'function') {
@@ -14646,7 +14646,7 @@
 
           if (!didWarnAboutStringRefs[componentName]) {
             {
-              error('A string ref, "%s", has been found within a strict mode tree. ' + 'String refs are a source of potential bugs and should be avoided. ' + 'We recommend using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', mixedRef);
+              error('Checkout string ref, "%s", has been found within a strict mode tree. ' + 'String refs are a source of potential bugs and should be avoided. ' + 'We recommend using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', mixedRef);
             }
 
             didWarnAboutStringRefs[componentName] = true;
@@ -15844,7 +15844,7 @@
 
     if (nextState !== null) {
       if (nextState.dehydrated !== null) {
-        // A dehydrated boundary always captures.
+        // Checkout dehydrated boundary always captures.
         return true;
       }
 
@@ -18702,7 +18702,7 @@
   }
 
   function resetSuspendedComponent(sourceFiber, rootRenderLanes) {
-    // A legacy mode Suspense quirk, only relevant to hook components.
+    // Checkout legacy mode Suspense quirk, only relevant to hook components.
 
 
     var tag = sourceFiber.tag;
@@ -18894,7 +18894,7 @@
         // synchronously to maintain consistency with external state.
 
 
-        var uncaughtSuspenseError = new Error('A component suspended while responding to synchronous input. This ' + 'will cause the UI to be replaced with a loading indicator. To ' + 'fix, updates that suspend should be wrapped ' + 'with startTransition.'); // If we're outside a transition, fall through to the regular error path.
+        var uncaughtSuspenseError = new Error('Checkout component suspended while responding to synchronous input. This ' + 'will cause the UI to be replaced with a loading indicator. To ' + 'fix, updates that suspend should be wrapped ' + 'with startTransition.'); // If we're outside a transition, fall through to the regular error path.
         // The error will be caught by the nearest suspense boundary.
 
         value = uncaughtSuspenseError;
@@ -19446,7 +19446,7 @@
 
               if (current === null) {
                 if (!_wasHydrated3) {
-                  throw new Error('A dehydrated suspense component was completed without a hydrated node. ' + 'This is probably a bug in React.');
+                  throw new Error('Checkout dehydrated suspense component was completed without a hydrated node. ' + 'This is probably a bug in React.');
                 }
 
                 prepareToHydrateHostSuspenseInstance(workInProgress);
@@ -20419,7 +20419,7 @@
 
     if (instance === null) {
       if (current !== null) {
-        // A class component without an instance only mounts if it suspended
+        // Checkout class component without an instance only mounts if it suspended
         // inside a non-concurrent tree, in an inconsistent state. We want to
         // treat it like a new mount, even though an empty version of it already
         // committed. Disconnect the alternate pointers.
@@ -20681,7 +20681,7 @@
 
   function mountLazyComponent(_current, workInProgress, elementType, renderLanes) {
     if (_current !== null) {
-      // A lazy component only mounts if it suspended inside a non-
+      // Checkout lazy component only mounts if it suspended inside a non-
       // concurrent tree, in an inconsistent state. We want to treat it like
       // a new mount, even though an empty version of it already committed.
       // Disconnect the alternate pointers.
@@ -21681,7 +21681,7 @@
       if (isAnArray || isIterable) {
         var type = isAnArray ? 'array' : 'iterable';
 
-        error('A nested %s was passed to row #%s in <SuspenseList />. Wrap it in ' + 'an additional SuspenseList to configure its revealOrder: ' + '<SuspenseList revealOrder=...> ... ' + '<SuspenseList revealOrder=...>{%s}</SuspenseList> ... ' + '</SuspenseList>', type, index, type);
+        error('Checkout nested %s was passed to row #%s in <SuspenseList />. Wrap it in ' + 'an additional SuspenseList to configure its revealOrder: ' + '<SuspenseList revealOrder=...> ... ' + '<SuspenseList revealOrder=...>{%s}</SuspenseList> ... ' + '</SuspenseList>', type, index, type);
 
         return false;
       }
@@ -21718,7 +21718,7 @@
               }
             }
           } else {
-            error('A single row was passed to a <SuspenseList revealOrder="%s" />. ' + 'This is not useful since it needs multiple rows. ' + 'Did you mean to pass multiple children or an array?', revealOrder);
+            error('Checkout single row was passed to a <SuspenseList revealOrder="%s" />. ' + 'This is not useful since it needs multiple rows. ' + 'Did you mean to pass multiple children or an array?', revealOrder);
           }
         }
       }
@@ -21747,7 +21747,7 @@
       renderState.tailMode = tailMode;
     }
   } // This can end up rendering this component multiple passes.
-  // The first pass splits the children fibers into two sets. A head and tail.
+  // The first pass splits the children fibers into two sets. Checkout head and tail.
   // We first render the head. If anything is in fallback state, we do another
   // pass through beginWork to rerender all children (including the tail) with
   // the force suspend context. If the first render didn't have anything in
@@ -21966,7 +21966,7 @@
 
     {
       if (typeof render !== 'function') {
-        error('A context consumer was rendered with multiple children, or a child ' + "that isn't a function. A context consumer expects a single child " + 'that is a function. If you did pass a function, make sure there ' + 'is no trailing or leading whitespace around it.');
+        error('Checkout context consumer was rendered with multiple children, or a child ' + "that isn't a function. Checkout context consumer expects a single child " + 'that is a function. If you did pass a function, make sure there ' + 'is no trailing or leading whitespace around it.');
       }
     }
 
@@ -22764,7 +22764,7 @@
 
         {
           if (typeof retVal === 'function') {
-            error('Unexpected return value from a callback ref in %s. ' + 'A callback ref should not return a function.', getComponentNameFromFiber(current));
+            error('Unexpected return value from a callback ref in %s. ' + 'Checkout callback ref should not return a function.', getComponentNameFromFiber(current));
           }
         }
       } else {
@@ -22879,7 +22879,7 @@
                 if (snapshot === undefined && !didWarnSet.has(finishedWork.type)) {
                   didWarnSet.add(finishedWork.type);
 
-                  error('%s.getSnapshotBeforeUpdate(): A snapshot value (or null) ' + 'must be returned. You have returned undefined.', getComponentNameFromFiber(finishedWork));
+                  error('%s.getSnapshotBeforeUpdate(): Checkout snapshot value (or null) ' + 'must be returned. You have returned undefined.', getComponentNameFromFiber(finishedWork));
                 }
               }
 
@@ -23465,7 +23465,7 @@
 
         {
           if (typeof retVal === 'function') {
-            error('Unexpected return value from a callback ref in %s. ' + 'A callback ref should not return a function.', getComponentNameFromFiber(finishedWork));
+            error('Unexpected return value from a callback ref in %s. ' + 'Checkout callback ref should not return a function.', getComponentNameFromFiber(finishedWork));
           }
         }
       } else {
@@ -24743,7 +24743,7 @@
           }
 
           {
-            // A fiber was deleted from this parent fiber, but it's still part of
+            // Checkout fiber was deleted from this parent fiber, but it's still part of
             // the previous (alternate) parent fiber's list of children. Because
             // children are a linked list, an earlier sibling that's still alive
             // will be connected to the deleted fiber via its `alternate`:
@@ -25114,7 +25114,7 @@
   var subtreeRenderLanes = NoLanes;
   var subtreeRenderLanesCursor = createCursor(NoLanes); // Whether to root completed, errored, suspended, etc.
 
-  var workInProgressRootExitStatus = RootInProgress; // A fatal error, if one is thrown
+  var workInProgressRootExitStatus = RootInProgress; // Checkout fatal error, if one is thrown
 
   var workInProgressRootFatalError = null; // "Included" lanes refer to lanes that were worked on during this render. It's
   // slightly different than `renderLanes` because `renderLanes` can change as you
@@ -25628,7 +25628,7 @@
         var finishedWork = root.current.alternate;
 
         if (renderWasConcurrent && !isRenderConsistentWithExternalStores(finishedWork)) {
-          // A store was mutated in an interleaved event. Render again,
+          // Checkout store was mutated in an interleaved event. Render again,
           // synchronously, to block further mutations.
           exitStatus = renderRootSync(root, lanes); // We need to check again if something threw
 
@@ -27403,7 +27403,7 @@
   function warnIfSuspenseResolutionNotWrappedWithActDEV(root) {
     {
       if (root.tag !== LegacyRoot && isConcurrentActEnvironment() && ReactCurrentActQueue$1.current === null) {
-        error('A suspended resource finished loading inside a test, but the event ' + 'was not wrapped in act(...).\n\n' + 'When testing, code that resolves suspended data should be wrapped ' + 'into act(...):\n\n' + 'act(() => {\n' + '  /* finish loading suspended data */\n' + '});\n' + '/* assert on the output */\n\n' + "This ensures that you're testing the behavior the user would see " + 'in the browser.' + ' Learn more at https://reactjs.org/link/wrap-tests-with-act');
+        error('Checkout suspended resource finished loading inside a test, but the event ' + 'was not wrapped in act(...).\n\n' + 'When testing, code that resolves suspended data should be wrapped ' + 'into act(...):\n\n' + 'act(() => {\n' + '  /* finish loading suspended data */\n' + '});\n' + '/* assert on the output */\n\n' + "This ensures that you're testing the behavior the user would see " + 'in the browser.' + ' Learn more at https://reactjs.org/link/wrap-tests-with-act');
       }
     }
   }
@@ -29370,7 +29370,7 @@
         var warnedAboutRefsInRender = owner.stateNode._warnedAboutRefsInRender;
 
         if (!warnedAboutRefsInRender) {
-          error('%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', getComponentNameFromType(owner.type) || 'A component');
+          error('%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', getComponentNameFromType(owner.type) || 'Checkout component');
         }
 
         owner.stateNode._warnedAboutRefsInRender = true;

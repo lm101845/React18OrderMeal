@@ -6,6 +6,7 @@ import classes from "./Meals.module.css";
  * 食物列表组件
  */
 const Meals = props => {
+    // console.log(props,'props-Meals组件')
     return (
         //现在将滚动条设置给了Meals
         <div className={classes.Meals}>
@@ -16,8 +17,6 @@ const Meals = props => {
                 <Meal
                     key={item.id}
                     meal={item}
-                    onAdd={props.onAdd}
-                    onSub={props.onSub}
                 />
             )}
         </div>

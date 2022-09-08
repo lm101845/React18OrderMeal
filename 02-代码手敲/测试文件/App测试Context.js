@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import Meals from "./components/Meals/Meals";
-import CartContext from "./store/cart-context"
-import FilterMeals from "./components/FilterMeals/FilterMeals";
-import Cart from "./components/Cart/Cart";
+// import Checkout from "./components/Checkout";
+// import B from "./components/B";
+// import TestContext from './store/testContext'
 //模拟一组食物的数据
 const MEALS_DATA = [
     {
@@ -68,28 +68,18 @@ const App = () => {
         totalPrice: 0
     })
 
-    //创建一个过滤meals的一个函数
-    const filterHandler = (keyword) => {
-        const newMealsData = MEALS_DATA.filter(item => item.title.indexOf(keyword) !== -1)
-        setMealsData(newMealsData)
-    }
     //向购物车中添加商品——点击加按钮的时候就调用一次
-    const addItem = meal => {
+    const addMealHandler = (meal) => {
         //meal表示要添加进购物车的商品
         //对购物车进行复制
-        console.log(cartData, 'cartData')
         const newCart = {...cartData}
-        console.log(newCart.items, 'newCart.items')
-        console.log(meal, 'meal')
 
         //将meal添加到购物车中——有一个问题：如果商品已经存在，就不用加了
         //所以我们在添加之前要做一个判断——判断购物车中是否存在该商品
         if (newCart.items.indexOf(meal) === -1) {
-            console.log('第一次添加')
             newCart.items.push(meal);
             meal.amount = 1;
         } else {
-            console.log('第二次添加')
             //修改商品的数量
             meal.amount++;
         }
@@ -103,7 +93,7 @@ const App = () => {
     }
 
     //减少商品的数量
-    const removeItem = meal => {
+    const subMealHandler = (meal) => {
         //复制购物车
         const newCart = {...cartData}
         //减少商品数量
@@ -118,27 +108,22 @@ const App = () => {
         newCart.totalPrice -= meal.price;
         setCartData(newCart)
     }
-
-    //清空购物车
-    const clearCart = ()=>{
-        const newCart = {...cartData}
-        //将购物车中商品的数量都清零
-        newCart.items.forEach(item=>delete item.amount)
-        newCart.items = [];
-        newCart.totalAmount = 0;
-        newCart.totalPrice = 0;
-        setCartData(newCart)
-    }
     return (
-        <CartContext.Provider value={{...cartData, addItem, removeItem,clearCart}}>
-            <div>
-                <FilterMeals onFilter={filterHandler}/>
+        <div>
+            {/*<Checkout/>*/}
+            {/*A不是TestContext的子组件，它访问的就是孙悟空了*/}
+            {/*<TestContext.Provider value={{name: '猪八戒', age: 28}}>*/}
+            {/*    <Checkout></Checkout>*/}
+            {/*    <TestContext.Provider value={{name: '沙和尚', age: 38}}>*/}
+            {/*        <B></B>*/}
+            {/*    </TestContext.Provider>*/}
                 <Meals
                     mealsData={mealsData}
+                    onAdd={addMealHandler}
+                    onSub={subMealHandler}
                 />
-                <Cart/>
-            </div>
-        </CartContext.Provider>
+            {/*</TestContext.Provider>*/}
+        </div>
     )
 }
 

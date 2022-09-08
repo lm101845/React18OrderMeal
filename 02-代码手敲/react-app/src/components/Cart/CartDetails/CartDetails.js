@@ -1,23 +1,30 @@
+/**
+ * @Author liming
+ * @Date 2022/9/8 18:53
+ **/
+
 import React, {useContext, useState} from 'react';
 import Backdrop from "../../UI/Backdrop/Backdrop";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
-import classes from './CartDetails.module.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import classes from "./CartDetails.module.css"
 import CartContext from "../../../store/cart-context";
 import Meal from "../../Meals/Meal/Meal";
 import Confirm from "../../UI/Confirm/Confirm";
 
 const CartDetails = () => {
-
-    const ctx = useContext(CartContext);
+    const ctx = useContext(CartContext)
 
     // 设置state控制确认框的显示
     const [showConfirm, setShowConfirm] = useState(false);
 
+    //设置state控制显示餐品详情页的显示
+    const [showCartDetails,setShowCartDetails] = useState(true)
+
     // 添加函数显示确认窗口
-    const showConfirmHandler = () => {
-        setShowConfirm(true);
-    };
+    const showConfirmHandler = () =>{
+        setShowConfirm(true)
+    }
 
     const cancelHandler = (e) => {
         e.stopPropagation();
@@ -27,17 +34,15 @@ const CartDetails = () => {
     const okHandler = () => {
         // 清空购物车
         ctx.clearCart();
-
+        setShowCartDetails(false)
     };
 
     return (
-        <Backdrop>
-
+        showCartDetails && <Backdrop>
             {showConfirm && <Confirm
                 onCancel={cancelHandler}
                 onOk={okHandler}
-                confirmText={'确认清空购物车吗？'}/>}
-
+                confirmText={'确认清空购物车吗'}/>}
             <div
                 className={classes.CartDetails}
                 onClick={e => e.stopPropagation()}
@@ -51,17 +56,19 @@ const CartDetails = () => {
                         <span>清空购物车</span>
                     </div>
                 </header>
-
                 <div className={classes.MealList}>
                     {
                         ctx.items.map(item =>
-                            <Meal noDesc key={item.id} meal={item}/>
+                            <Meal
+                                noDesc
+                                key={item.id}
+                                meal={item}/>
                         )
                     }
                 </div>
             </div>
         </Backdrop>
-    );
-};
+    )
+}
 
 export default CartDetails;
