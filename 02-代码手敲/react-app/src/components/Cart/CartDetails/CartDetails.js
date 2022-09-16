@@ -33,7 +33,8 @@ const CartDetails = () => {
 
     const okHandler = () => {
         // 清空购物车
-        ctx.clearCart();
+        // ctx.clearCart();
+        ctx.cartDispatch({type:'CLEAR'})
         setShowCartDetails(false)
     };
 

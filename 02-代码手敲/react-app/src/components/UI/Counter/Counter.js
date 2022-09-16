@@ -33,15 +33,22 @@ const Counter = (props) => {
 
     //添加购物车的函数
     const addButtonHandler = () => {
+        //写法1：
         // props.onAdd(props.meal);
-        ctx.addItem(props.meal)
+        //写法2：
+        // ctx.addItem(props.meal)
+        //写法3：
+        ctx.cartDispatch({type:'ADD',meal:props.meal})
+        //这里meal是通过对象去传递的
     }
 
     //删除食物的函数
     const subButtonHandler = () => {
         // props.onSub(props.meal);
-        ctx.removeItem(props.meal)
+        // ctx.removeItem(props.meal)
+        ctx.cartDispatch({type:'REMOVE',meal:props.meal})
     }
+
     return (<div className={classes.Counter}>
         {//减少按钮和数字不一定有
             (props.meal.amount && props.meal.amount !== 0) ?

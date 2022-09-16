@@ -1,43 +1,45 @@
-/**
- * @Author liming
- * @Date 2022/9/12 19:56
- **/
-
 import React, {useEffect, useState} from 'react';
-import B from "./B";
+import StudentList from "./components/StudentList";
+import './App.css';
+
 
 const App = () => {
-    console.log('组件App重新渲染了')
-    const [count, setCount] = useState(0)
 
-    //写法1：
-    //使用定时器可以，但是我们习惯用useEffect
-    // setTimeout(() =>{
-    //     setCount(1)
-    // },0)
+    const [stuData, setStuData] = useState([]);
 
+    /*
+    *   将写死的数据替换为从接口 http://localhost:1337/api/students
+    *       中加载的数据
+    *
+    *   组件初始化时需要向服务器发送请求来加载数据(只加载一次，初始化完成后，暂时就不需要加载数据了)
+    * */
+    useEffect(() => {
+        // 在effect中加载数据
+        // fetch() 用来向服务器发送请求加载数据，是Ajax的升级版
+        // 它需要两个参数：1.请求地址 2.请求信息
+        fetch('http://localhost:1337/api/students')
+            .then((res) => {
+                // response表示响应信息
+                console.log(res,'原始res')
+                return res.json();// 该方法可以将响应的json直接转换为js对象
+                //res.json()是一个Promise对象，所以不能直接打印！！！
+            })
+            .then(data => {
+                console.log(data,'第2次data');
+                // 将加载到的数据设置到state中
+                setStuData(data.data);
+            })
+            .catch(() => {
+            });
 
-    //写法2：
-    // useEffect()是一个钩子函数，需要一个函数作为参数
-    //      这个作为参数的函数，将会在组件渲染完毕后执行
-    //  在开发中，可以将那些会产生副作用的代码编写到useEffect的回调函数中
-    //      这样就可以避免这些代码影响到组件的渲染
-    useEffect(()=>{
-        setCount(1)
-    })
+    }, []);
+    //中括号里面什么也不传，它就初始化时就只调用一次
 
-    const clickHandler = ()=>{
-        console.log('点击按钮！')
-        setCount(1)
-    }
     return (
-        <div>
-            {count}
-            <B/>
-            {/*通常情况下，父组件重新渲染了，里面的子组件也会重新渲染*/}
-            <button onClick={clickHandler}>点我一下</button>
+        <div className="app">
+            <StudentList stus={stuData}/>
         </div>
     );
-}
+};
 
 export default App;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import Meals from "./components/Meals/Meals";
 import CartContext from "./store/cart-context"
 import FilterMeals from "./components/FilterMeals/FilterMeals";
@@ -52,6 +52,40 @@ const MEALS_DATA = [
     }
 ];
 
+//定义CartReducer(要在组件外部定义)
+const cartReducer = (state, action) => {
+    //浅复制购物车
+    const newCart = {...state}
+    switch (action.type){
+        case "ADD":
+            if (newCart.items.indexOf(action.meal) === -1) {
+                newCart.items.push(action.meal);
+                action.meal.amount = 1;
+            } else {
+                action.meal.amount++;
+            }
+            newCart.totalAmount++;
+            newCart.totalPrice += action.meal.price;
+            return newCart;
+        case "REMOVE":
+            action.meal.amount--;
+            if (action.meal.amount === 0) {
+                newCart.items.splice(newCart.items.indexOf(action.meal), 1);
+            }
+            newCart.totalAmount--;
+            newCart.totalPrice -= action.meal.price;
+            return newCart;
+        case "CLEAR":
+            newCart.items.forEach(item=>delete item.amount)
+            newCart.items = [];
+            newCart.totalAmount = 0;
+            newCart.totalPrice = 0;
+            return newCart;
+        default:
+            return state;
+    }
+}
+
 const App = () => {
     //创建一个state，用来存储食物列表
     const [mealsData, setMealsData] = useState(MEALS_DATA);
@@ -62,7 +96,16 @@ const App = () => {
      * 2.商品总数(totalAmount)
      * 3.商品总价(totalPrice)
      */
-    const [cartData, setCartData] = useState({
+
+    //写法1：
+    // const [cartData, setCartData] = useState({
+    //     items: [],
+    //     totalAmount: 0,
+    //     totalPrice: 0
+    // })
+
+    //写法2：代码优化：使用Reducer来替换state
+    const [cartData, cartDispatch] = useReducer(cartReducer, {
         items: [],
         totalAmount: 0,
         totalPrice: 0
@@ -74,63 +117,67 @@ const App = () => {
         setMealsData(newMealsData)
     }
     //向购物车中添加商品——点击加按钮的时候就调用一次
-    const addItem = meal => {
-        //meal表示要添加进购物车的商品
-        //对购物车进行复制
-        console.log(cartData, 'cartData')
-        const newCart = {...cartData}
-        console.log(newCart.items, 'newCart.items')
-        console.log(meal, 'meal')
-
-        //将meal添加到购物车中——有一个问题：如果商品已经存在，就不用加了
-        //所以我们在添加之前要做一个判断——判断购物车中是否存在该商品
-        if (newCart.items.indexOf(meal) === -1) {
-            console.log('第一次添加')
-            newCart.items.push(meal);
-            meal.amount = 1;
-        } else {
-            console.log('第二次添加')
-            //修改商品的数量
-            meal.amount++;
-        }
-        //增加总数
-        newCart.totalAmount++;
-        //增加总金额
-        newCart.totalPrice += meal.price;
-
-        //重新设置购物车
-        setCartData(newCart)
-    }
+    // const addItem = meal => {
+    //     //meal表示要添加进购物车的商品
+    //     //对购物车进行复制
+    //     //如果数组或对象中的元素是引用类型的元素，那么就是浅拷贝,改newCart，也会影响到cartData
+    //     //https://blog.csdn.net/weixin_43925630/article/details/111299038
+    //     console.log(cartData, 'cartData')
+    //     const newCart = {...cartData}
+    //     console.log(newCart.items, 'newCart.items')
+    //     console.log(meal, 'meal')
+    //
+    //     //将meal添加到购物车中——有一个问题：如果商品已经存在，就不用加了
+    //     //所以我们在添加之前要做一个判断——判断购物车中是否存在该商品
+    //     if (newCart.items.indexOf(meal) === -1) {
+    //         console.log('第一次添加')
+    //         newCart.items.push(meal);
+    //         meal.amount = 1;
+    //     } else {
+    //         console.log('第二次添加')
+    //         //修改商品的数量
+    //         meal.amount++;
+    //     }
+    //     //增加总数
+    //     newCart.totalAmount++;
+    //     //增加总金额
+    //     newCart.totalPrice += meal.price;
+    //
+    //     //重新设置购物车
+    //     setCartData(newCart)
+    // }
 
     //减少商品的数量
-    const removeItem = meal => {
-        //复制购物车
-        const newCart = {...cartData}
-        //减少商品数量
-        meal.amount--;
-        //检查商品数量是否归0
-        if (meal.amount === 0) {
-            //从购物车中移除商品
-            newCart.items.splice(newCart.items.indexOf(meal), 1);
-        }
-        //修改商品的总数和总金额
-        newCart.totalAmount--;
-        newCart.totalPrice -= meal.price;
-        setCartData(newCart)
-    }
+    // const removeItem = meal => {
+    //     //复制购物车
+    //     const newCart = {...cartData}
+    //     //减少商品数量
+    //     meal.amount--;
+    //     //检查商品数量是否归0
+    //     if (meal.amount === 0) {
+    //         //从购物车中移除商品
+    //         newCart.items.splice(newCart.items.indexOf(meal), 1);
+    //     }
+    //     //修改商品的总数和总金额
+    //     newCart.totalAmount--;
+    //     newCart.totalPrice -= meal.price;
+    //     // setCartData(newCart)
+    // }
 
     //清空购物车
-    const clearCart = ()=>{
-        const newCart = {...cartData}
-        //将购物车中商品的数量都清零
-        newCart.items.forEach(item=>delete item.amount)
-        newCart.items = [];
-        newCart.totalAmount = 0;
-        newCart.totalPrice = 0;
-        setCartData(newCart)
-    }
+    // const clearCart = ()=>{
+    //     const newCart = {...cartData}
+    //     //将购物车中商品的数量都清零
+    //     newCart.items.forEach(item=>delete item.amount)
+    //     newCart.items = [];
+    //     newCart.totalAmount = 0;
+    //     newCart.totalPrice = 0;
+    //     // setCartData(newCart)
+    // }
+
     return (
-        <CartContext.Provider value={{...cartData, addItem, removeItem,clearCart}}>
+        // <CartContext.Provider value={{...cartData, addItem, removeItem,clearCart}}>
+        <CartContext.Provider value={{...cartData, cartDispatch}}>
             <div>
                 <FilterMeals onFilter={filterHandler}/>
                 <Meals
