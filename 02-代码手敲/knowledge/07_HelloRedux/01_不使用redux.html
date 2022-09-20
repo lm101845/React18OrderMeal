@@ -1,0 +1,35 @@
+<!--
+ * @Author liming
+ * @Date 2022/9/20 20:10
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <button id="sub">减少</button>
+    <span id="countSpan">1</span>
+    <button id="add">增加</button>
+</div>
+<script src="https://unpkg.com/redux@4.2.0/dist/redux.js"></script>
+<script>
+    const subBtn = document.getElementById('sub');
+    const addBtn = document.getElementById('add');
+    const countSpan = document.getElementById('countSpan');
+
+    let count = 1;
+    subBtn.addEventListener('click',()=>{
+        count--;
+        countSpan.innerText = count;
+    })
+
+    addBtn.addEventListener('click',()=>{
+        count++;
+        countSpan.innerText = count;
+    })
+</script>
+</body>
+</html>

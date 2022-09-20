@@ -1,0 +1,104 @@
+<!--
+ * @Author liming
+ * @Date 2022/9/20 20:10
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <button id="sub">减少</button>
+    <span id="countSpan">1</span>
+    <span id="nameSpan"></span>
+    <button id="add">增加</button>
+    <button id="addFive">加5</button>
+    <button id="addN">加N</button>
+</div>
+<script src="https://unpkg.com/redux@4.2.0/dist/redux.js"></script>
+<script>
+    const subBtn = document.getElementById('sub');
+    const addBtn = document.getElementById('add');
+    const addFiveBtn = document.getElementById('addFive');
+    const addNBtn = document.getElementById('addN');
+    const countSpan = document.getElementById('countSpan');
+    const nameSpan = document.getElementById('nameSpan');
+
+    /**
+     *   网页中使用redux的步骤：
+     *       1.引入redux核心包
+     *       2.创建reducer整合函数
+     *       3.通过reducer对象创建store
+     *       4.对store中的state进行订阅
+     *       5.通过dispatch派发state的操作指令
+     * */
+    // function reducer(state, action) {
+    // function reducer(state = 1, action) {
+    function reducer(state = {count:1,name:'孙悟空'}, action) {
+        //注意：state整体是一个对象！！里面可以存很多state
+        /**
+         *  state 表示当前state，可以根据这个state生成新的state
+         *  action 是一个js对象，它里边会保存操作的信息
+         *      type表示操作的类型
+         *      其他需要传递的参数，也可以在action中设置
+         */
+        switch (action.type) {
+            case 'ADD':
+                // return state + 1;
+                // return {count:state.count + 1};
+                return {...state,count:state.count + 1};
+                //我们先对state进行一个浅复制，你想改里面哪个，后面再写
+                //否则，没有变的内容，比如name,就会变成undefined了
+            case 'ADD_FIVE':
+                return {...state,count:state.count + 5};
+            //但是这样写太不灵活了，我想加几就加几
+            case 'ADD_N':
+                return {...state,count:state.count + action.payload};
+            case 'SUB':
+                return {...state,count:state.count - 1};
+            default:
+                return state;
+        }
+    }
+
+    // const store = Redux.createStore(reducer, 1);
+    const store = Redux.createStore(reducer);
+    //第2个参数是初始值
+    //你也可以在reducer函数的state参数里面写初始值
+    nameSpan.innerText = store.getState().name;
+
+    store.subscribe(() => {
+        //当store里面的state发生变化的时候，这个回调函数就会执行
+        //打印state的值
+        console.log(store.getState())
+        // countSpan.innerText = store.getState()
+        countSpan.innerText = store.getState().count
+        nameSpan.innerText = store.getState().name;
+    })
+
+    let count = 1;
+    subBtn.addEventListener('click', () => {
+        // count--;
+        // countSpan.innerText = count;
+        //当我点击减这个按钮的时候，它就会派发一个SUB，减的指令
+        store.dispatch({type: 'SUB'})
+    })
+
+    addBtn.addEventListener('click', () => {
+        // count++;
+        // countSpan.innerText = count;
+        store.dispatch({type: 'ADD'})
+    })
+
+    addFiveBtn.addEventListener('click',()=>{
+        store.dispatch({type:'ADD_FIVE'})
+    })
+
+    addNBtn.addEventListener('click',()=>{
+        store.dispatch({type:'ADD_N',payload:10})
+    })
+</script>
+</body>
+</html>
