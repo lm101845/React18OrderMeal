@@ -1,0 +1,16 @@
+/**
+ * @Author liming
+ * @Date 2022/9/24 15:46
+ **/
+
+a:link,
+a:visited{
+    color: orange;
+    text-decoration: none;
+}
+
+a:hover,
+a.active{
+    color: red;
+    text-decoration: underline;
+}
