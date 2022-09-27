@@ -24,13 +24,13 @@ const MainMenu = () => {
                 {
                     auth.isLogin &&
                     <>
-                        <li><Link to={"/profile"}>{auth.user.username}</Link></li>
-                        <li><Link
-                            to={"/"}
-                            onClick={()=>dispatch(loginout())}
-                        >登出</Link></li>
+                        <li><Link to={"/profile"}>{auth.user?.username}</Link></li>
+                        <li><Link to={"/"} onClick={()=>dispatch(loginout())}>登出</Link></li>
                     </>
                 }
+                <li>
+                    <Link to={"/student"}>学生信息</Link>
+                </li>
             </ul>
         </header>
     );

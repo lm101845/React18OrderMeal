@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-import {Route, Routes, Navigate} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import Layout from "./components/Layout";
 import AuthPage from "./pages/AuthPage";
-import {useSelector} from "react-redux";
 import NeedAuth from "./components/NeedAuth";
+import {useDispatch, useSelector} from "react-redux";
+import {loginout} from "./store/reducer/authSlice";
+import useAutoLogout from "./hooks/useAutoLogout";
+import StudentList from "./components/Student/StudentList";
+import StudentPage from "./pages/StudentPage";
 
 function App() {
-    const auth = useSelector(state => state.auth)
+    useAutoLogout()
     return (
-        <div>
             <Layout>
                 <Routes>
                     <Route path={"/"} element={<HomePage/>}></Route>
@@ -21,16 +24,11 @@ function App() {
                     {/*</Route>*/}
 
                     {/*写法2：*/}
-                    <Route path={"/profile"} element={
-                        <NeedAuth>
-                            <ProfilePage/>
-                        </NeedAuth>}>
-
-                    </Route>
+                    <Route path={"/profile"} element={<NeedAuth><ProfilePage/></NeedAuth>}></Route>
                     <Route path={"/auth-form"} element={<AuthPage/>}></Route>
+                    <Route path={"student"} element={<NeedAuth><StudentPage/></NeedAuth>}/>
                 </Routes>
             </Layout>
-        </div>
     )
 }
 
